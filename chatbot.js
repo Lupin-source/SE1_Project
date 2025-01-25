@@ -5,7 +5,7 @@ const chatbot = {
         this.messages = document.getElementById('chat-messages');
         this.userInput = document.getElementById('user-input');
         this.sendBtn = document.getElementById('send-btn');
-        this.isTyping = false;
+        this.isProcessing = false;
 
         this.setupEventListeners();
         this.loadHistory();
@@ -16,25 +16,97 @@ const chatbot = {
         this.toggle.addEventListener('click', () => this.toggleChat());
         document.querySelector('.close-chat').addEventListener('click', () => this.closeChat());
         this.sendBtn.addEventListener('click', () => this.handleUserInput());
-        this.userInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter' && !this.isTyping) this.handleUserInput();
+        this.userInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey && !this.isProcessing) {
+                e.preventDefault();
+                this.handleUserInput();
+            }
         });
     },
 
     toggleChat() {
-        this.container.style.display = 'flex';
-        this.toggle.style.display = 'none';
+        this.container.classList.toggle('open');
+        this.toggle.classList.toggle('active');
         this.scrollToBottom();
     },
 
     closeChat() {
-        this.container.style.display = 'none';
-        this.toggle.style.display = 'block';
+        this.container.classList.remove('open');
+        this.toggle.classList.remove('active');
     },
 
-    addMessage(text, isUser = true) {
+    async handleUserInput() {
+        const message = this.userInput.value.trim();
+        if (!message || this.isProcessing) return;
+
+        try {
+            this.isProcessing = true;
+            this.addMessage(message, true);
+            this.userInput.value = '';
+            
+            // Show typing indicator
+            this.showTypingIndicator();
+            
+            // Simulate processing delay
+            await new Promise(resolve => setTimeout(resolve, 800));
+            
+            const response = this.generateResponse(message);
+            this.hideTypingIndicator();
+            this.addMessage(response, false);
+            
+            this.saveHistory();
+        } catch (error) {
+            this.addMessage('⚠️ Connection error. Please try again.', false);
+            console.error('Chat error:', error);
+        } finally {
+            this.isProcessing = false;
+        }
+    },
+
+    generateResponse(userMessage) {
+        const lowerMsg = userMessage.toLowerCase();
+        const responses = {
+            greeting: {
+                patterns: [/hello/i, /hi/i, /hey/i],
+                replies: [
+                    "Hello! Welcome to TechParts. How can I assist you today? 😊",
+                    "Hi there! What can I help you with?",
+                    "Welcome! Need help with computer parts or peripherals?"
+                ]
+            },
+            shipping: {
+                patterns: [/shipping/i, /delivery/i, /ship time/i],
+                replies: [
+                    "We offer:\n- 🚚 Standard shipping (3-5 days)\n- ✈️ Express shipping (1-2 days)",
+                    "Free shipping on orders over $500! 📦"
+                ]
+            },
+            returns: {
+                patterns: [/return/i, /refund/i, /exchange/i],
+                replies: [
+                    "Our return policy:\n- 30-day returns\n- Original packaging required",
+                    "Need help with a return? Visit our [Returns Portal](#) 📦"
+                ]
+            },
+            default: {
+                replies: [
+                    "I can help with:\n- Order tracking\n- Product recommendations\n- Technical support\nHow can I assist?",
+                    "Need help with:\n1. 🖥️ Computer components\n2. ⌨️ Peripherals\n3. 📦 Shipping info\nWhat do you need?"
+                ]
+            }
+        };
+
+        const category = Object.entries(responses).find(([_, data]) => 
+            data.patterns?.some(pattern => pattern.test(lowerMsg))
+        )?.[0] || 'default';
+
+        const replies = responses[category].replies;
+        return replies[Math.floor(Math.random() * replies.length)];
+    },
+
+    addMessage(text, isUser = false) {
         const message = document.createElement('div');
-        message.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+        message.className = `message ${isUser ? 'user' : 'bot'}`;
         
         const time = new Date().toLocaleTimeString([], { 
             hour: '2-digit', 
@@ -42,101 +114,48 @@ const chatbot = {
         });
 
         message.innerHTML = `
-            <div class="message-header">
-                <div class="avatar ${isUser ? 'user' : 'bot'}"></div>
-                <strong>${isUser ? 'You' : 'TechBot'}</strong>
+            <div class="message-container">
+                <div class="avatar">${isUser ? '👤' : '🤖'}</div>
+                <div class="content">
+                    <div class="text">${this.formatMarkdown(text)}</div>
+                    <div class="meta">
+                        <span class="time">${time}</span>
+                    </div>
+                </div>
             </div>
-            <div class="message-content">${text}</div>
-            <div class="message-time">${time}</div>
         `;
 
         this.messages.appendChild(message);
         this.scrollToBottom();
-        this.saveHistory();
-    },
-
-    async handleUserInput() {
-        try {
-            const message = this.userInput.value.trim();
-            if (!message || this.isTyping) return;
-
-            this.addMessage(message, true);
-            this.userInput.value = '';
-            this.showTypingIndicator();
-            
-            // Simulate API call delay
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            
-            const response = this.generateResponse(message);
-            this.addMessage(response, false);
-            this.hideTypingIndicator();
-        } catch (error) {
-            console.error('Chat error:', error);
-            this.addMessage('Sorry, something went wrong. Please try again.', false);
-            this.hideTypingIndicator();
-        }
-    },
-
-    generateResponse(userMessage) {
-        const lowerMsg = userMessage.toLowerCase();
-        const responses = {
-            greeting: [
-                'Hello! How can I assist you today?',
-                'Hi there! What can I help you with?',
-                'Welcome to TechParts! How can I help?'
-            ],
-            shipping: [
-                'We offer free shipping on orders over $500!',
-                'Standard shipping takes 3-5 business days',
-                'Express shipping available for $9.99'
-            ],
-            returns: [
-                '30-day return policy for unused items',
-                'Please contact support@techparts.com for returns',
-                'Most items come with 1-year warranty'
-            ],
-            order: [
-                'Check your order status with your order number',
-                'Track your package using our order tracking system',
-                'Shipping updates are sent via email'
-            ],
-            default: [
-                'Could you please rephrase that?',
-                'I\'m here to help with product questions!',
-                'For more help, email support@techparts.com'
-            ]
-        };
-
-        let category = 'default';
-        if (/(hello|hi|hey)/i.test(lowerMsg)) category = 'greeting';
-        if (/(ship|delivery)/i.test(lowerMsg)) category = 'shipping';
-        if (/(return|refund)/i.test(lowerMsg)) category = 'returns';
-        if (/(order|track)/i.test(lowerMsg)) category = 'order';
-
-        const replyOptions = responses[category] || responses.default;
-        return replyOptions[Math.floor(Math.random() * replyOptions.length)];
     },
 
     showTypingIndicator() {
-        if (this.isTyping) return;
-        this.isTyping = true;
-        
         const typing = document.createElement('div');
-        typing.className = 'typing-indicator';
+        typing.className = 'message bot typing';
         typing.innerHTML = `
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
+            <div class="message-container">
+                <div class="avatar">🤖</div>
+                <div class="content">
+                    <div class="text"><span class="typing-dots">...</span></div>
+                </div>
+            </div>
         `;
-        
+
         this.messages.appendChild(typing);
         this.scrollToBottom();
     },
 
     hideTypingIndicator() {
-        this.isTyping = false;
-        const indicators = this.messages.querySelectorAll('.typing-indicator');
-        indicators.forEach(indicator => indicator.remove());
+        const typing = this.messages.querySelector('.typing');
+        if (typing) typing.remove();
+    },
+
+    formatMarkdown(text) {
+        return text
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/\*(.*?)\*/g, '<em>$1</em>')
+            .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank">$1</a>')
+            .replace(/\n/g, '<br>');
     },
 
     scrollToBottom() {
@@ -144,21 +163,17 @@ const chatbot = {
     },
 
     saveHistory() {
-        try {
-            const history = Array.from(this.messages.children)
-                .map(msg => msg.outerHTML)
-                .filter(html => !html.includes('typing-indicator'));
-            
-            localStorage.setItem('chatHistory', JSON.stringify(history));
-        } catch (error) {
-            console.error('Error saving history:', error);
-        }
+        const history = Array.from(this.messages.children)
+            .map(msg => msg.outerHTML)
+            .filter(html => !html.includes('typing'));
+        
+        localStorage.setItem('chatHistory', JSON.stringify(history));
     },
 
     loadHistory() {
         try {
             const history = JSON.parse(localStorage.getItem('chatHistory'));
-            if (history && history.length > 0) {
+            if (history) {
                 this.messages.innerHTML = history.join('');
                 this.scrollToBottom();
             }
@@ -171,15 +186,11 @@ const chatbot = {
     showWelcomeMessage() {
         if (!localStorage.getItem('chatHistory')) {
             setTimeout(() => {
-                this.addMessage('Welcome to TechParts! How can I help you today?', false);
-            }, 500);
+                this.addMessage("Welcome to TechParts! I'm your AI assistant. Ask me about:\n\n- Product availability\n- Order status\n- Technical specifications\n- Compatibility questions", false);
+            }, 1000);
         }
     }
 };
 
 // Initialize when DOM is loaded
-if (document.readyState !== 'loading') {
-    chatbot.init();
-} else {
-    document.addEventListener('DOMContentLoaded', () => chatbot.init());
-}
+document.addEventListener('DOMContentLoaded', () => chatbot.init());

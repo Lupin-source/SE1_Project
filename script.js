@@ -68,7 +68,7 @@ function addToCart(productId) {
     const product = products.find(p => p.id === productId);
     cart.push({...product});
     updateCartUI();
-    
+
     // Add pulse animation
     const cartIcon = document.querySelector('.cart-icon');
     cartIcon.classList.add('added');
