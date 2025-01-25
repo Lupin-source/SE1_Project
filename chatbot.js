@@ -1,78 +1,185 @@
-// Chatbot functionality
-const chatbotToggle = document.querySelector('.chatbot-toggle');
-const chatbotContainer = document.querySelector('.chatbot-container');
-const chatMessages = document.getElementById('chat-messages');
-const userInput = document.getElementById('user-input');
-const sendBtn = document.getElementById('send-btn');
+const chatbot = {
+    init() {
+        this.toggle = document.querySelector('.chatbot-toggle');
+        this.container = document.querySelector('.chatbot-container');
+        this.messages = document.getElementById('chat-messages');
+        this.userInput = document.getElementById('user-input');
+        this.sendBtn = document.getElementById('send-btn');
+        this.isTyping = false;
 
-// Toggle chatbot visibility
-chatbotToggle.addEventListener('click', () => {
-    chatbotContainer.style.display = 'flex';
-    chatbotToggle.style.display = 'none';
-});
+        this.setupEventListeners();
+        this.loadHistory();
+        this.showWelcomeMessage();
+    },
 
-document.querySelector('.close-chat').addEventListener('click', () => {
-    chatbotContainer.style.display = 'none';
-    chatbotToggle.style.display = 'block';
-});
+    setupEventListeners() {
+        this.toggle.addEventListener('click', () => this.toggleChat());
+        document.querySelector('.close-chat').addEventListener('click', () => this.closeChat());
+        this.sendBtn.addEventListener('click', () => this.handleUserInput());
+        this.userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !this.isTyping) this.handleUserInput();
+        });
+    },
 
-// Handle user messages
-function addMessage(message, isUser = true) {
-    const messageDiv = document.createElement('div');
-    messageDiv.classList.add('message', isUser ? 'user-message' : 'bot-message');
-    messageDiv.textContent = message;
-    chatMessages.appendChild(messageDiv);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
+    toggleChat() {
+        this.container.style.display = 'flex';
+        this.toggle.style.display = 'none';
+        this.scrollToBottom();
+    },
+
+    closeChat() {
+        this.container.style.display = 'none';
+        this.toggle.style.display = 'block';
+    },
+
+    addMessage(text, isUser = true) {
+        const message = document.createElement('div');
+        message.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+        
+        const time = new Date().toLocaleTimeString([], { 
+            hour: '2-digit', 
+            minute: '2-digit' 
+        });
+
+        message.innerHTML = `
+            <div class="message-header">
+                <div class="avatar ${isUser ? 'user' : 'bot'}"></div>
+                <strong>${isUser ? 'You' : 'TechBot'}</strong>
+            </div>
+            <div class="message-content">${text}</div>
+            <div class="message-time">${time}</div>
+        `;
+
+        this.messages.appendChild(message);
+        this.scrollToBottom();
+        this.saveHistory();
+    },
+
+    async handleUserInput() {
+        try {
+            const message = this.userInput.value.trim();
+            if (!message || this.isTyping) return;
+
+            this.addMessage(message, true);
+            this.userInput.value = '';
+            this.showTypingIndicator();
+            
+            // Simulate API call delay
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            const response = this.generateResponse(message);
+            this.addMessage(response, false);
+            this.hideTypingIndicator();
+        } catch (error) {
+            console.error('Chat error:', error);
+            this.addMessage('Sorry, something went wrong. Please try again.', false);
+            this.hideTypingIndicator();
+        }
+    },
+
+    generateResponse(userMessage) {
+        const lowerMsg = userMessage.toLowerCase();
+        const responses = {
+            greeting: [
+                'Hello! How can I assist you today?',
+                'Hi there! What can I help you with?',
+                'Welcome to TechParts! How can I help?'
+            ],
+            shipping: [
+                'We offer free shipping on orders over $500!',
+                'Standard shipping takes 3-5 business days',
+                'Express shipping available for $9.99'
+            ],
+            returns: [
+                '30-day return policy for unused items',
+                'Please contact support@techparts.com for returns',
+                'Most items come with 1-year warranty'
+            ],
+            order: [
+                'Check your order status with your order number',
+                'Track your package using our order tracking system',
+                'Shipping updates are sent via email'
+            ],
+            default: [
+                'Could you please rephrase that?',
+                'I\'m here to help with product questions!',
+                'For more help, email support@techparts.com'
+            ]
+        };
+
+        let category = 'default';
+        if (/(hello|hi|hey)/i.test(lowerMsg)) category = 'greeting';
+        if (/(ship|delivery)/i.test(lowerMsg)) category = 'shipping';
+        if (/(return|refund)/i.test(lowerMsg)) category = 'returns';
+        if (/(order|track)/i.test(lowerMsg)) category = 'order';
+
+        const replyOptions = responses[category] || responses.default;
+        return replyOptions[Math.floor(Math.random() * replyOptions.length)];
+    },
+
+    showTypingIndicator() {
+        if (this.isTyping) return;
+        this.isTyping = true;
+        
+        const typing = document.createElement('div');
+        typing.className = 'typing-indicator';
+        typing.innerHTML = `
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        `;
+        
+        this.messages.appendChild(typing);
+        this.scrollToBottom();
+    },
+
+    hideTypingIndicator() {
+        this.isTyping = false;
+        const indicators = this.messages.querySelectorAll('.typing-indicator');
+        indicators.forEach(indicator => indicator.remove());
+    },
+
+    scrollToBottom() {
+        this.messages.scrollTop = this.messages.scrollHeight;
+    },
+
+    saveHistory() {
+        try {
+            const history = Array.from(this.messages.children)
+                .map(msg => msg.outerHTML)
+                .filter(html => !html.includes('typing-indicator'));
+            
+            localStorage.setItem('chatHistory', JSON.stringify(history));
+        } catch (error) {
+            console.error('Error saving history:', error);
+        }
+    },
+
+    loadHistory() {
+        try {
+            const history = JSON.parse(localStorage.getItem('chatHistory'));
+            if (history && history.length > 0) {
+                this.messages.innerHTML = history.join('');
+                this.scrollToBottom();
+            }
+        } catch (error) {
+            console.error('Error loading history:', error);
+            localStorage.removeItem('chatHistory');
+        }
+    },
+
+    showWelcomeMessage() {
+        if (!localStorage.getItem('chatHistory')) {
+            setTimeout(() => {
+                this.addMessage('Welcome to TechParts! How can I help you today?', false);
+            }, 500);
+        }
+    }
+};
+
+// Initialize when DOM is loaded
+if (document.readyState !== 'loading') {
+    chatbot.init();
+} else {
+    document.addEventListener('DOMContentLoaded', () => chatbot.init());
 }
-
-// Simple bot responses
-function handleBotResponse(userMessage) {
-    const responses = {
-        'hello': 'Hello! How can I assist you today?',
-        'shipping': 'We offer free shipping on orders over $500!',
-        'return': 'Our return policy allows returns within 30 days of purchase.',
-        'payment': 'We accept all major credit cards and PayPal.',
-        'default': 'Sorry, I didn\'t understand that. Could you please rephrase?'
-    };
-
-    const lowerMessage = userMessage.toLowerCase();
-    let response = responses.default;
-
-    if (lowerMessage.includes('hello') || lowerMessage.includes('hi')) {
-        response = responses.hello;
-    } else if (lowerMessage.includes('shipping')) {
-        response = responses.shipping;
-    } else if (lowerMessage.includes('return')) {
-        response = responses.return;
-    } else if (lowerMessage.includes('payment')) {
-        response = responses.payment;
-    }
-
-    setTimeout(() => {
-        addMessage(response, false);
-    }, 1000);
-}
-
-// Send message
-sendBtn.addEventListener('click', () => {
-    const message = userInput.value.trim();
-    if (message) {
-        addMessage(message, true);
-        handleBotResponse(message);
-        userInput.value = '';
-    }
-});
-
-// Handle Enter key
-userInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        sendBtn.click();
-    }
-});
-
-// Initial bot message
-window.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => {
-        addMessage('Hello! How can I help you with your computer hardware needs?', false);
-    }, 1000);
-});
