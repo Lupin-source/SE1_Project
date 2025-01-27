@@ -108,7 +108,6 @@ const products = [
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 const cartSidebar = document.getElementById("cart-sidebar");
-const cartOverlay = document.getElementById("cart-overlay");
 
 function init() {
     renderProducts();
@@ -118,139 +117,69 @@ function init() {
 
 // Render products dynamically
 function renderProducts(productsToShow = products) {
-    const container = document.getElementById("products-container");
+    const container = document.querySelector("#products-container .row");
     container.innerHTML = productsToShow
         .map(
             (product) => `
-        <div class="product-card">
-            <img src="${product.image}" alt="${product.name}" class="product-image">
-            <h3>${product.name}</h3>
-            <p class="product-category">${product.category.toUpperCase()}</p>
-            <p class="product-price">₱${product.price.toLocaleString()}</p>
-            <button class="btn primary-btn" onclick="addToCart(${product.id})">Add to Cart</button>
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <img src="${product.image}" class="card-img-top" alt="${product.name}">
+                <div class="card-body">
+                    <h5 class="card-title">${product.name}</h5>
+                    <p class="text-muted">${product.category.toUpperCase()}</p>
+                    <p class="text-danger fw-bold">₱${product.price.toLocaleString()}</p>
+                    <button class="btn btn-primary w-100" onclick="addToCart(${product.id})">Add to Cart</button>
+                </div>
+            </div>
         </div>
     `
         )
         .join("");
 }
 
-// Update cart UI in the sidebar
+// Update cart UI
 function updateCartUI() {
-    const cartCounter = document.querySelector(".cart-counter");
     const cartItems = document.getElementById("cart-items");
+    const cartCounter = document.querySelector(".cart-counter");
     const cartTotal = document.getElementById("cart-total");
 
-    // Update cart counter
     cartCounter.textContent = cart.length;
-
-    // Update cart items
     cartItems.innerHTML = cart.length
         ? cart
               .map(
                   (item) => `
-        <div class="cart-item">
-            <div class="item-details">
-                <span class="item-name">${item.name}</span>
-                <span class="item-price">₱${item.price.toLocaleString()}</span>
-            </div>
-            <button class="btn danger-btn" onclick="removeFromCart(${item.id})">&times;</button>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <span>${item.name}</span>
+            <span>₱${item.price.toLocaleString()}</span>
+            <button class="btn btn-sm btn-danger" onclick="removeFromCart(${item.id})">&times;</button>
         </div>
     `
               )
               .join("")
-        : '<p class="empty-cart">Your cart is empty.</p>';
+        : `<p class="text-center">Your cart is empty.</p>`;
 
-    // Update total price
-    cartTotal.textContent = cart
-        .reduce((sum, item) => sum + item.price, 0)
-        .toLocaleString();
-
-    // Save cart to localStorage
+    cartTotal.textContent = cart.reduce((sum, item) => sum + item.price, 0).toLocaleString();
     localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-// Add a product to the cart
+// Add product to cart
 function addToCart(productId) {
     const product = products.find((p) => p.id === productId);
-    cart.push({ ...product });
+    cart.push(product);
     updateCartUI();
-
-    // Show notification
-    showNotification(`${product.name} added to cart.`);
 }
 
-// Remove a product from the cart
+// Remove product from cart
 function removeFromCart(productId) {
-    const index = cart.findIndex((item) => item.id === productId);
-    if (index > -1) {
-        const removedProduct = cart[index];
-        cart.splice(index, 1);
-        updateCartUI();
-
-        // Show notification
-        showNotification(`${removedProduct.name} removed from cart.`);
-    }
+    cart = cart.filter((item) => item.id !== productId);
+    updateCartUI();
 }
 
-// Show or hide the cart sidebar
-function toggleCart() {
-    const isVisible = cartSidebar.classList.toggle("cart-visible");
-    cartOverlay.style.display = isVisible ? "block" : "none";
-}
-
-// Display a notification
-function showNotification(message) {
-    const notification = document.createElement("div");
-    notification.className = "notification";
-    notification.textContent = message;
-    document.body.appendChild(notification);
-
-    setTimeout(() => {
-        notification.classList.add("fade-out");
-        setTimeout(() => notification.remove(), 500);
-    }, 2000);
-}
-
-// Setup event listeners
 function setupEventListeners() {
-    // Category filtering
-    document.querySelectorAll(".nav-link").forEach((link) => {
-        link.addEventListener("click", (e) => {
-            e.preventDefault();
-            const category = link.dataset.category;
-
-            document
-                .querySelectorAll(".nav-link")
-                .forEach((l) => l.classList.remove("active"));
-            link.classList.add("active");
-
-            const filteredProducts =
-                category === "all"
-                    ? products
-                    : products.filter((p) => p.category === category);
-
-            renderProducts(filteredProducts);
-        });
-    });
-
-    // Cart sidebar events
-    document.getElementById("cart-btn").addEventListener("click", toggleCart);
-    document.querySelector(".close-cart").addEventListener("click", toggleCart);
-    cartOverlay.addEventListener("click", toggleCart);
-
-    // Checkout button
-    document.getElementById("checkout-btn").addEventListener("click", () => {
-        if (cart.length === 0) {
-            alert("Your cart is empty!");
-            return;
-        }
-
-        alert("Redirecting to checkout...");
-        cart = [];
-        updateCartUI();
-        closeCart();
+    document.getElementById("cart-btn").addEventListener("click", () => {
+        const offcanvas = new bootstrap.Offcanvas(cartSidebar);
+        offcanvas.show();
     });
 }
 
-// Initialize app
-init();
+document.addEventListener("DOMContentLoaded", init);
