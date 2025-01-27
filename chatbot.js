@@ -59,12 +59,15 @@ const chatbot = {
     },
 
     addMessage(text, isUser) {
-        const message = document.createElement('div');
-        message.className = `my-2 p-2 rounded ${isUser ? 'bg-primary text-white text-end' : 'bg-light text-dark'}`;
+        const message = document.createElement("div");
+        message.className = `message ${isUser ? "user" : "bot"}`;
         message.textContent = text;
         this.messages.appendChild(message);
+      
+        // Scroll to the bottom of the chat
         this.messages.scrollTop = this.messages.scrollHeight;
-    },
+      }
+      ,
 
     showWelcomeMessage() {
         setTimeout(() => {
