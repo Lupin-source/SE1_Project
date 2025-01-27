@@ -127,8 +127,21 @@ function renderProducts(productsToShow = products) {
                 <div class="card-body">
                     <h5 class="card-title">${product.name}</h5>
                     <p class="text-muted">${product.category.toUpperCase()}</p>
-                    <p class="text-danger fw-bold">₱${product.price.toLocaleString()}</p>
-                    <button class="btn btn-primary w-100" onclick="addToCart(${product.id})">Add to Cart</button>
+                    <p class="text-danger">₱${product.price.toLocaleString()}</p>
+                    <div class="button-container">
+                        <button class="cartBtn" onclick="addToCart(${product.id})">
+                            <svg class="cart" fill="white" viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"></path>
+                            </svg>
+                            ADD TO CART
+                        </button>
+                        <button class="buyNowBtn" onclick="buyNow(${product.id})">
+                            <svg class="cart" fill="white" viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"></path>
+                            </svg>
+                            BUY NOW
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -137,35 +150,129 @@ function renderProducts(productsToShow = products) {
         .join("");
 }
 
+
+
+
+// Add product to cart
+function addToCart(productId) {
+    const existingProduct = cart.find((item) => item.id === productId);
+
+    if (existingProduct) {
+        existingProduct.quantity += 1; // Increase quantity if product exists
+    } else {
+        const product = products.find((p) => p.id === productId);
+        cart.push({ ...product, quantity: 1 }); // Add product with quantity 1
+    }
+
+    updateCartUI();
+}
+
 // Update cart UI
 function updateCartUI() {
     const cartItems = document.getElementById("cart-items");
     const cartCounter = document.querySelector(".cart-counter");
     const cartTotal = document.getElementById("cart-total");
 
-    cartCounter.textContent = cart.length;
-    cartItems.innerHTML = cart.length
-        ? cart
-              .map(
-                  (item) => `
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <span>${item.name}</span>
-            <span>₱${item.price.toLocaleString()}</span>
-            <button class="btn btn-sm btn-danger" onclick="removeFromCart(${item.id})">&times;</button>
-        </div>
-    `
-              )
-              .join("")
-        : `<p class="text-center">Your cart is empty.</p>`;
+    cartCounter.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
 
-    cartTotal.textContent = cart.reduce((sum, item) => sum + item.price, 0).toLocaleString();
+    if (cart.length === 0) {
+        cartItems.innerHTML = `<p class="text-center">Your cart is empty.</p>`;
+    } else {
+        cartItems.innerHTML = cart
+            .map(
+                (item) => `
+                <div class="cart-item d-flex justify-content-between align-items-center py-2">
+                    <div class="cart-item-details">
+                        <h6 class="cart-item-name">${item.name}</h6>
+                        <small class="cart-item-price">₱${item.price.toLocaleString()} x${item.quantity}</small>
+                    </div>
+                    <div class="cart-item-actions">
+                        <button class="btn btn-sm btn-outline-success" onclick="increaseQuantity(${item.id})">+</button>
+                        <button class="btn btn-sm btn-outline-danger" onclick="decreaseQuantity(${item.id})">-</button>
+                        <button class="btn btn-sm btn-danger" onclick="removeFromCart(${item.id})">&times;</button>
+                    </div>
+                </div>
+            `
+            )
+            .join("");
+    }
+
+    cartTotal.textContent = cart
+        .reduce((sum, item) => sum + item.price * item.quantity, 0)
+        .toLocaleString();
+
     localStorage.setItem("cart", JSON.stringify(cart));
 }
 
 // Add product to cart
 function addToCart(productId) {
-    const product = products.find((p) => p.id === productId);
-    cart.push(product);
+    const existingProduct = cart.find((item) => item.id === productId);
+
+    if (existingProduct) {
+        existingProduct.quantity += 1; // Increase quantity if the product exists
+    } else {
+        const product = products.find((p) => p.id === productId);
+        cart.push({ ...product, quantity: 1 }); // Add product with initial quantity
+    }
+
+    updateCartUI();
+}
+
+// Update cart UI
+function updateCartUI() {
+    const cartItems = document.getElementById("cart-items");
+    const cartCounter = document.querySelector(".cart-counter");
+    const cartTotal = document.getElementById("cart-total");
+
+    // Update cart counter
+    cartCounter.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+    // Update cart items
+    if (cart.length === 0) {
+        cartItems.innerHTML = `<p class="text-center">Your cart is empty.</p>`;
+    } else {
+        cartItems.innerHTML = cart
+            .map(
+                (item) => `
+                <div class="cart-item">
+                    <div class="cart-item-details">
+                        <h6 class="cart-item-name">${item.name}</h6>
+                        <small class="cart-item-price">₱${item.price.toLocaleString()} x${item.quantity}</small>
+                    </div>
+                    <div class="cart-item-actions">
+                        <button onclick="increaseQuantity(${item.id})">+</button>
+                        <button onclick="decreaseQuantity(${item.id})">-</button>
+                        <button onclick="removeFromCart(${item.id})">&times;</button>
+                    </div>
+                </div>
+            `
+            )
+            .join("");
+    }
+
+    // Update total price
+    cartTotal.textContent = `₱${cart
+        .reduce((sum, item) => sum + item.price * item.quantity, 0)
+        .toLocaleString()}`;
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+// Increase quantity
+function increaseQuantity(productId) {
+    const product = cart.find((item) => item.id === productId);
+    if (product) product.quantity += 1;
+    updateCartUI();
+}
+
+// Decrease quantity
+function decreaseQuantity(productId) {
+    const product = cart.find((item) => item.id === productId);
+    if (product && product.quantity > 1) {
+        product.quantity -= 1;
+    } else {
+        removeFromCart(productId);
+    }
     updateCartUI();
 }
 
@@ -175,6 +282,14 @@ function removeFromCart(productId) {
     updateCartUI();
 }
 
+// Show the cart when clicked
+document.getElementById("cart-btn").addEventListener("click", () => {
+    const offcanvas = new bootstrap.Offcanvas(cartSidebar);
+    offcanvas.show();
+});
+
+
+
 function setupEventListeners() {
     document.getElementById("cart-btn").addEventListener("click", () => {
         const offcanvas = new bootstrap.Offcanvas(cartSidebar);
@@ -183,3 +298,22 @@ function setupEventListeners() {
 }
 
 document.addEventListener("DOMContentLoaded", init);
+document.addEventListener("DOMContentLoaded", () => {
+    const collectionCarousel = document.getElementById("collection-carousel");
+    const leftBtn = document.getElementById("collection-left-btn");
+    const rightBtn = document.getElementById("collection-right-btn");
+
+    leftBtn.addEventListener("click", () => {
+        collectionCarousel.scrollBy({
+            left: -150, // Adjust scroll distance as needed
+            behavior: "smooth",
+        });
+    });
+
+    rightBtn.addEventListener("click", () => {
+        collectionCarousel.scrollBy({
+            left: 150, // Adjust scroll distance as needed
+            behavior: "smooth",
+        });
+    });
+});
