@@ -1,110 +1,114 @@
 const products = [
-    { 
-        id: 1, 
-        name: 'AMD Ryzen 9 7950X', 
-        price: 39999, // Price in PHP
-        category: 'components', 
-        image: 'https://placehold.co/600x400?text=AMD+Ryzen+9+7950X' 
-    },
-    { 
-        id: 2, 
-        name: 'NVIDIA RTX 4090', 
-        price: 89999, // Price in PHP
-        category: 'components', 
-        image: 'https://placehold.co/600x400?text=NVIDIA+RTX+4090' 
-    },
-    { 
-        id: 3, 
-        name: 'Corsair 32GB DDR5 RAM', 
-        price: 10999, // Price in PHP
-        category: 'components', 
-        image: 'https://placehold.co/600x400?text=Corsair+32GB+DDR5+RAM' 
-    },
-    { 
-        id: 4, 
-        name: 'ASUS ROG Crosshair X670E', 
-        price: 34999, // Price in PHP
-        category: 'components', 
-        image: 'https://placehold.co/600x400?text=ASUS+ROG+Crosshair+X670E' 
-    },
-    { 
-        id: 5, 
-        name: 'Noctua NH-D15 Chromax', 
-        price: 5999, // Price in PHP
-        category: 'components', 
-        image: 'https://placehold.co/600x400?text=Noctua+NH-D15+Chromax' 
-    },
-    { 
-        id: 6, 
-        name: 'Logitech MX Master 3S', 
-        price: 5999, // Price in PHP
-        category: 'peripherals', 
-        image: 'https://placehold.co/600x400?text=Logitech+MX+Master+3S' 
-    },
-    { 
-        id: 7, 
-        name: 'Keychron K8 Pro Keyboard', 
-        price: 7999, // Price in PHP
-        category: 'peripherals', 
-        image: 'https://placehold.co/600x400?text=Keychron+K8+Pro' 
-    },
-    { 
-        id: 8, 
-        name: 'Samsung Odyssey G9 Monitor', 
-        price: 69999, // Price in PHP
-        category: 'peripherals', 
-        image: 'https://placehold.co/600x400?text=Samsung+Odyssey+G9' 
-    },
-    { 
-        id: 9, 
-        name: 'Bose QuietComfort 45', 
-        price: 17999, // Price in PHP
-        category: 'peripherals', 
-        image: 'https://placehold.co/600x400?text=Bose+QuietComfort+45' 
-    },
-    { 
-        id: 10, 
-        name: 'Blue Yeti X Microphone', 
-        price: 8999, // Price in PHP
-        category: 'peripherals', 
-        image: 'https://placehold.co/600x400?text=Blue+Yeti+X' 
-    },
-    { 
-        id: 11, 
-        name: 'Samsung 990 Pro 2TB', 
-        price: 9999, // Price in PHP
-        category: 'storage', 
-        image: 'https://placehold.co/600x400?text=Samsung+990+Pro+2TB' 
-    },
-    { 
-        id: 12, 
-        name: 'WD Black SN850X 4TB', 
-        price: 15999, // Price in PHP
-        category: 'storage', 
-        image: 'https://placehold.co/600x400?text=WD+Black+SN850X+4TB' 
-    },
-    { 
-        id: 13, 
-        name: 'Seagate IronWolf 12TB HDD', 
-        price: 13999, // Price in PHP
-        category: 'storage', 
-        image: 'https://placehold.co/600x400?text=Seagate+IronWolf+12TB' 
-    },
-    { 
-        id: 14, 
-        name: 'SanDisk Extreme Portable SSD', 
-        price: 6999, // Price in PHP
-        category: 'storage', 
-        image: 'https://placehold.co/600x400?text=SanDisk+Extreme+Portable' 
-    },
-    { 
-        id: 15, 
-        name: 'Crucial P5 Plus 1TB', 
-        price: 4999, // Price in PHP
-        category: 'storage', 
-        image: 'https://placehold.co/600x400?text=Crucial+P5+Plus+1TB' 
-    }
+    // Processor
+    { id: 1, name: 'AMD Ryzen 5 5600X', price: 14999, category: 'processor', image: 'https://placehold.co/600x400?text=Ryzen+5+5600X', description: 'A powerful 6-core processor with high efficiency for gaming and productivity.' },
+    { id: 2, name: 'Intel Core i7-12700K', price: 21999, category: 'processor', image: 'https://placehold.co/600x400?text=Intel+i7-12700K', description: 'A high-performance 12th Gen Intel processor with great multitasking capabilities.' },
+    { id: 3, name: 'AMD Ryzen 9 7950X', price: 39999, category: 'processor', image: 'https://placehold.co/600x400?text=Ryzen+9+7950X', description: 'Top-tier AMD processor with 16 cores, designed for extreme workloads and gaming.' },
+
+    // Motherboard
+    { id: 4, name: 'ASUS ROG Strix X570', price: 17999, category: 'motherboard', image: 'https://placehold.co/600x400?text=ASUS+X570', description: 'A premium gaming motherboard with PCIe 4.0 and robust cooling solutions.' },
+    { id: 5, name: 'MSI MAG B550', price: 13999, category: 'motherboard', image: 'https://placehold.co/600x400?text=MSI+B550', description: 'A reliable and durable B550 chipset motherboard for Ryzen processors.' },
+    { id: 6, name: 'Gigabyte AORUS B450', price: 9999, category: 'motherboard', image: 'https://placehold.co/600x400?text=Gigabyte+B450', description: 'An affordable yet feature-rich motherboard for gaming and overclocking.' },
+
+    // Graphics Card
+    { id: 7, name: 'NVIDIA RTX 3060', price: 32999, category: 'graphics-card', image: 'https://placehold.co/600x400?text=RTX+3060', description: 'A mid-range gaming GPU with ray tracing and DLSS support.' },
+    { id: 8, name: 'NVIDIA RTX 3080', price: 59999, category: 'graphics-card', image: 'https://placehold.co/600x400?text=RTX+3080', description: 'A high-performance graphics card for 4K gaming and content creation.' },
+    { id: 9, name: 'AMD Radeon RX 6700XT', price: 47999, category: 'graphics-card', image: 'https://placehold.co/600x400?text=RX+6700XT', description: 'A powerful AMD GPU for smooth gaming at 1440p resolution.' },
+
+    // Memory
+    { id: 10, name: 'Corsair 16GB DDR4 RAM', price: 4999, category: 'memory', image: 'https://placehold.co/600x400?text=Corsair+16GB+DDR4', description: 'High-speed DDR4 RAM for fast and responsive multitasking.' },
+    { id: 11, name: 'G.Skill Trident Z 32GB DDR5', price: 12999, category: 'memory', image: 'https://placehold.co/600x400?text=GSkill+32GB+DDR5', description: 'Next-gen DDR5 RAM optimized for extreme performance.' },
+    { id: 12, name: 'Kingston Fury Beast 64GB DDR4', price: 19999, category: 'memory', image: 'https://placehold.co/600x400?text=Kingston+64GB', description: 'High-capacity RAM for intensive workloads and gaming.' },
+
+    // Power Supply
+    { id: 13, name: 'EVGA 750W Gold', price: 7999, category: 'power-supply', image: 'https://placehold.co/600x400?text=EVGA+750W', description: 'A reliable 750W power supply with 80 Plus Gold efficiency.' },
+    { id: 14, name: 'Corsair RM850X', price: 9999, category: 'power-supply', image: 'https://placehold.co/600x400?text=Corsair+RM850X', description: 'Fully modular 850W PSU for high-performance builds.' },
+    { id: 15, name: 'Seasonic Focus 1000W', price: 12999, category: 'power-supply', image: 'https://placehold.co/600x400?text=Seasonic+1000W', description: 'A powerful and stable PSU designed for overclocking and extreme performance.' },
+
+    // PC Case
+    { id: 16, name: 'Lian Li PC-O11 Dynamic', price: 12999, category: 'pc-case', image: 'https://placehold.co/600x400?text=LianLi+O11', description: 'A premium PC case with tempered glass and excellent airflow.' },
+    { id: 17, name: 'NZXT H710', price: 10999, category: 'pc-case', image: 'https://placehold.co/600x400?text=NZXT+H710', description: 'A stylish case with spacious interior and great cooling support.' },
+    { id: 18, name: 'Cooler Master TD500', price: 6999, category: 'pc-case', image: 'https://placehold.co/600x400?text=CM+TD500', description: 'A mid-tower case with mesh front panel for enhanced airflow.' },
+
+    // Laptops
+    { id: 19, name: 'MacBook Air M2', price: 69999, category: 'laptops', image: 'https://placehold.co/600x400?text=MacBook+Air+M2', description: 'An ultra-light laptop with Apple’s M2 chip for performance and efficiency.' },
+    { id: 20, name: 'ASUS ROG Strix G17', price: 89999, category: 'laptops', image: 'https://placehold.co/600x400?text=ROG+Strix+G17', description: 'A high-performance gaming laptop with AMD Ryzen and RTX graphics.' },
+    { id: 21, name: 'Lenovo Legion 5', price: 74999, category: 'laptops', image: 'https://placehold.co/600x400?text=Legion+5', description: 'A gaming laptop with a powerful GPU and cooling system.' },
+
+    // Monitor
+    { id: 16, name: 'Samsung Odyssey G9', price: 69999, category: 'monitor', image: 'https://placehold.co/600x400?text=Odyssey+G9', description: 'A curved ultra-wide gaming monitor with a 240Hz refresh rate for smooth gameplay.' },
+    { id: 17, name: 'ASUS TUF VG27AQ', price: 32999, category: 'monitor', image: 'https://placehold.co/600x400?text=ASUS+VG27AQ', description: 'A high-performance 27-inch gaming monitor with 165Hz refresh rate and G-Sync compatibility.' },
+    { id: 18, name: 'LG UltraGear 32-inch', price: 49999, category: 'monitor', image: 'https://placehold.co/600x400?text=LG+UltraGear', description: 'A large 32-inch gaming monitor with fast response times and stunning visuals.' },
+
+    // Keyboard
+    { id: 19, name: 'Keychron K6 Wireless', price: 6999, category: 'keyboard', image: 'https://placehold.co/600x400?text=Keychron+K6', description: 'A compact mechanical keyboard with Bluetooth connectivity and hot-swappable switches.' },
+    { id: 20, name: 'Razer Huntsman Mini', price: 8999, category: 'keyboard', image: 'https://placehold.co/600x400?text=Razer+Huntsman', description: 'A 60% gaming keyboard with ultra-fast optical switches for precision gaming.' },
+    { id: 21, name: 'SteelSeries Apex Pro', price: 11999, category: 'keyboard', image: 'https://placehold.co/600x400?text=Apex+Pro', description: 'A premium gaming keyboard with adjustable actuation switches and customizable RGB.' },
+
+    // Mouse
+    { id: 22, name: 'Logitech G Pro Wireless', price: 7999, category: 'mouse', image: 'https://placehold.co/600x400?text=Logitech+G+Pro', description: 'A lightweight wireless gaming mouse designed for esports professionals.' },
+    { id: 23, name: 'Razer DeathAdder V2', price: 5999, category: 'mouse', image: 'https://placehold.co/600x400?text=DeathAdder+V2', description: 'An ergonomic gaming mouse with high-precision optical sensor and ultra-fast response time.' },
+    { id: 24, name: 'Corsair M65 RGB Elite', price: 4999, category: 'mouse', image: 'https://placehold.co/600x400?text=Corsair+M65', description: 'A durable gaming mouse with customizable weight and sniper button for FPS games.' },
+
+
+    // Headset
+    { id: 22, name: 'HyperX Cloud II', price: 7999, category: 'headset', image: 'https://placehold.co/600x400?text=HyperX+Cloud+II', description: 'A comfortable gaming headset with 7.1 surround sound.' },
+    { id: 23, name: 'SteelSeries Arctis Pro', price: 12999, category: 'headset', image: 'https://placehold.co/600x400?text=Arctis+Pro', description: 'High-fidelity gaming headset with a premium audio experience.' },
+    { id: 24, name: 'Razer BlackShark V2', price: 8999, category: 'headset', image: 'https://placehold.co/600x400?text=BlackShark+V2', description: 'A lightweight headset with advanced noise cancellation.' },
+
+    // Speaker
+    { id: 10, name: 'Logitech Z906 5.1', price: 19999, category: 'speaker', image: 'https://placehold.co/600x400?text=Logitech+Z906', description: 'A 5.1 surround sound speaker system for immersive audio.' },
+    { id: 11, name: 'Bose Companion 2', price: 7999, category: 'speaker', image: 'https://placehold.co/600x400?text=Bose+Companion+2', description: 'Compact, high-quality speakers with rich stereo sound.' },
+    { id: 12, name: 'JBL Quantum Duo', price: 9999, category: 'speaker', image: 'https://placehold.co/600x400?text=JBL+Quantum', description: 'Gaming speakers with customizable lighting and deep bass.' },
+
+    // Network Devices
+    { id: 13, name: 'TP-Link Archer AX6000', price: 9999, category: 'network-devices', image: 'https://placehold.co/600x400?text=Archer+AX6000', description: 'A high-speed WiFi 6 router with ultra-fast connectivity.' },
+    { id: 14, name: 'Netgear Nighthawk AX12', price: 14999, category: 'network-devices', image: 'https://placehold.co/600x400?text=Nighthawk+AX12', description: 'A premium router for gaming and 4K streaming with high performance.' },
+    { id: 15, name: 'ASUS RT-AX86U', price: 12999, category: 'network-devices', image: 'https://placehold.co/600x400?text=ASUS+RT-AX86U', description: 'A dual-band WiFi 6 router with excellent range and speed.' }
 ];
+
+
+
+/// Function to render selected category products while keeping original styling
+function renderProductsByCategory(category) {
+    const container = document.querySelector("#products-container .row");
+    const filteredProducts = products.filter(product => product.category === category).slice(0, 3);
+
+    if (filteredProducts.length > 0) {
+        container.innerHTML = filteredProducts.map(product => `
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <img src="${product.image}" class="card-img-top" alt="${product.name}">
+                    <div class="card-body">
+                        <h5 class="card-title">${product.name}</h5>
+                        <p class="text-muted">${product.category.toUpperCase()}</p>
+                        <p class="text-danger fw-bold">₱${product.price.toLocaleString()}</p>
+                        <p class="product-description">${product.description}</p>
+                        <div class="button-container">
+                            <button class="cartBtn" onclick="addToCart(${product.id})">ADD TO CART</button>
+                            <button class="buyNowBtn" onclick="buyNow(${product.id})">BUY NOW</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `).join("");
+    }
+}
+
+
+// Event listener for collection card clicks
+document.querySelectorAll(".collection-card").forEach(card => {
+    card.addEventListener("click", function() {
+        const selectedCategory = this.getAttribute("data-category");
+        renderProductsByCategory(selectedCategory);
+    });
+});
+
+// Render default products when the page loads (optional)
+document.addEventListener("DOMContentLoaded", () => {
+    renderProductsByCategory("processor"); // Default category
+});
+
+
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 const cartSidebar = document.getElementById("cart-sidebar");
@@ -316,4 +320,29 @@ document.addEventListener("DOMContentLoaded", () => {
             behavior: "smooth",
         });
     });
+});
+// Function to check if user is logged in and update navbar
+function checkAuthentication() {
+    const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+
+    if (!loggedInUser) {
+        window.location.href = "login.html"; // Redirect if not logged in
+    } else {
+        document.getElementById("username-display").textContent = `Welcome, ${loggedInUser.username}`;
+    }
+}
+
+// Function to logout user
+document.getElementById("logout-btn").addEventListener("click", function() {
+    localStorage.removeItem("loggedInUser"); // Remove session data
+    window.location.href = "login.html"; // Redirect to login
+});
+
+// Run authentication check when the page loads
+document.addEventListener("DOMContentLoaded", checkAuthentication);
+
+// Logout Function
+document.getElementById("logout-btn").addEventListener("click", function() {
+    localStorage.removeItem("user"); // Remove user from localStorage
+    window.location.href = "login.html"; // Redirect to login page
 });
