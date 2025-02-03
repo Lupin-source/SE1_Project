@@ -1095,4 +1095,8 @@ body {
     background-color: #e53935; /* Red background on hover */
     color: white;
   }
-  
+  #username-display {
+    font-weight: bold;
+    color: white;
+    padding-left: 50px;
+}
