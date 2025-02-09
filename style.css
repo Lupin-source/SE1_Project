@@ -1100,3 +1100,825 @@ body {
     color: white;
     padding-left: 50px;
 }
+
+/* Ensure chatbot styles only affect the chatbot */
+/* Ensure chatbot is on top */
+.chatbot-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: none; /* Hidden initially */
+  z-index: 9999; /* Make sure it's above other elements */
+}
+
+
+/* Chatbot Card */
+.chatbot-container .card {
+  width: 260px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Chat Header */
+.chatbot-container .chat-header {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  font-size: 18px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  text-align: center;
+  position: relative;
+}
+
+/* Close Chat Button */
+.chatbot-container .close-chat {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  position: absolute;
+  top: 8px;
+  right: 10px;
+}
+
+/* Chat Window (Message Display) */
+.chatbot-container .chat-window {
+  height: 220px;
+  overflow-y: auto;
+  padding: 10px;
+  background: #f8f9fa;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Message List */
+.chatbot-container .message-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* User Messages (Right Side) */
+.chatbot-container .user-message {
+  align-self: flex-end;
+  background-color: #333;
+  color: white;
+  border-radius: 15px 15px 0 15px;
+  padding: 8px;
+  max-width: 75%;
+  margin: 5px;
+}
+
+/* Bot Messages (Left Side) */
+.chatbot-container .bot-message {
+  align-self: flex-start;
+  background-color: #ccc;
+  color: black;
+  border-radius: 15px 15px 15px 0;
+  padding: 8px;
+  max-width: 75%;
+  margin: 5px;
+}
+
+/* Chat Input */
+.chatbot-container .chat-input {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+  background: white;
+}
+
+/* Input Field */
+.chatbot-container .message-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 5px;
+  font-size: 14px;
+}
+
+/* Send Button */
+.chatbot-container .send-button {
+  border: none;
+  outline: none;
+  background-color: #333;
+  color: #fff;
+  font-size: 14px;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.chatbot-container .send-button:hover {
+  background-color: white;
+  color: black;
+  box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+}
+
+/* Hide the chatbot toggle button when chat is open */
+.hide-toggle {
+  display: none !important;
+}
+
+/* Make Chatbot Bigger */
+.chatbot-container .card {
+  width: 350px;  /* Increased from 260px */
+  height: 450px; /* Increased height */
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Chat Window (Increased Height) */
+.chatbot-container .chat-window {
+  height: 350px; /* Increased from 220px */
+  overflow-y: auto;
+  padding: 10px;
+  background: #f8f9fa;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Chat Input Adjustments */
+.chatbot-container .chat-input {
+  padding: 15px;
+}
+/* Increase Chat Header Font Size */
+.chatbot-container .chat-header {
+  font-size: 20px; /* Bigger text */
+  padding: 15px;   /* More space */
+}
+
+/* Increase Input Field Size */
+.chatbot-container .message-input {
+  font-size: 16px;
+  padding: 10px;
+}
+
+/* Increase Send Button Size */
+.chatbot-container .send-button {
+  font-size: 16px;
+  padding: 8px 12px;
+}
+/* Chatbot Container */
+.chatbot-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none;
+}
+
+/* Chatbot Card */
+.chatbot-container .card {
+    width: 350px;
+    height: 450px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Chat Window */
+.chatbot-container .chat-window {
+    height: 350px;
+    overflow-y: auto;
+    padding: 10px;
+    background: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Message List */
+.chatbot-container .message-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Bot Message with Profile Icon */
+.chatbot-container .bot-message {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between icon and text */
+    background: transparent;
+    max-width: 100%;
+    margin: 5px 0;
+}
+
+/* Bot Icon */
+.chatbot-container .bot-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: white;
+    padding: 5px;
+}
+
+/* Bot Message Bubble */
+.chatbot-container .bot-text {
+    background: #ccc;
+    color: black;
+    border-radius: 15px 15px 15px 0;
+    padding: 10px;
+    max-width: 70%;
+    display: inline-block;
+}
+
+/* Chat Header */
+.chatbot-container .chat-header {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  font-size: 18px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  text-align: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Chatbot Profile Icon in Header */
+.chatbot-container .chatbot-avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  padding: 3px;
+}
+
+/* Close Chat Button */
+.chatbot-container .close-chat {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+
+/* Concern Buttons Container */
+.concern-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+  align-items: center;
+}
+
+/* Individual Buttons */
+.concern-button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 90%;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.concern-button:hover {
+  background-color: #2980b9;
+}
+/* Selection Buttons Container */
+.selection-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+  align-items: center;
+}
+
+/* Individual Chat Option Buttons */
+.chat-option-button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 90%;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.chat-option-button:hover {
+  background-color: #2980b9;
+}
+/* Cart Notification Popup */
+.cart-notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Card Styling */
+.cart-notification .card {
+  width: 350px;
+  height: auto;
+  background: #f9f9f9;
+  border-radius: 5px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1), 0 2px 3px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+/* Cart Notification Popup */
+.cart-notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Card Styling */
+.cart-notification .card {
+  width: 400px;
+  height: auto;
+  background: #f9f9f9;
+  border-radius: 5px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1), 0 2px 3px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* Card Wrapper */
+.cart-notification .card-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+/* Cart Icon */
+.cart-notification .card-icon .icon-cart-box {
+  background-color: #e0f2f1;
+  width: 3em;
+  height: 3em;
+  border-radius: 50%;
+  text-align: center;
+  padding: 15px 0px;
+  margin: 0 auto;
+}
+
+/* Card Content */
+.cart-notification .card-content {
+  width: 80%;
+}
+
+/* Title */
+.cart-notification .card-title-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Close Button */
+.cart-notification .card-action {
+  cursor: pointer;
+}
+
+.cart-notification .card-action svg {
+  fill: rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+}
+
+.cart-notification .card-action svg:hover {
+  fill: rgba(0, 0, 0, 0.6);
+}
+
+/* Product Name */
+.cart-notification .product-name {
+  font-size: 0.9em;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Product Price */
+.cart-notification .product-price {
+  font-size: 0.9em;
+  font-weight: bold;
+  color: #009688;
+}
+
+/* View Cart Button */
+.cart-notification .btn-view-cart {
+  font-size: 0.8em;
+  font-weight: 600;
+  padding: 5px 10px;
+  margin: 10px 0;
+  border-radius: 15px;
+  color: #009688;
+  border: 1px solid #009688;
+  background-color: #e0f2f1;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.cart-notification .btn-view-cart:hover {
+  background-color: #009688;
+  color: white;
+}
+
+/* Cart Notification Popup */
+.cart-notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-in-out;
+  padding: 10px;
+}
+
+/* Card Styling */
+.cart-notification .card {
+  width: 400px;
+  height: auto;
+  background: #f9f9f9;
+  border-radius: 5px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1), 0 2px 3px rgba(0, 0, 0, 0.1);
+  padding: 15px;  /* Added padding for better spacing */
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* Card Wrapper */
+.cart-notification .card-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;  /* Space between icon and text */
+}
+
+/* Cart Icon */
+.cart-notification .card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;  /* Adjust width for better spacing */
+  height: 50px;
+}
+
+.cart-notification .icon-cart-box {
+  background-color: #e0f2f1;
+  width: 3.5em;
+  height: 3.5em;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Card Content */
+.cart-notification .card-content {
+  width: 100%;
+}
+
+/* Title Wrapper */
+.cart-notification .card-title-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px; /* Spacing between title and product details */
+}
+
+/* Title */
+.cart-notification .card-title {
+  font-size: 1em;
+  font-weight: 600;
+  color: #333;
+  padding-left: 5px;
+}
+
+/* Close Button */
+.cart-notification .card-action {
+  cursor: pointer;
+}
+
+.cart-notification .card-action svg {
+  fill: rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+}
+
+.cart-notification .card-action svg:hover {
+  fill: rgba(0, 0, 0, 0.6);
+}
+
+/* Product Name */
+.cart-notification .product-name {
+  font-size: 1em;
+  font-weight: 600;
+  color: #333;
+  margin-top: 5px;  /* Adds space between title and product name */
+}
+
+/* Product Price */
+.cart-notification .product-price {
+  font-size: 1em;
+  font-weight: bold;
+  color: #009688;
+  margin-top: 5px; /* Adds space between product name and price */
+}
+
+/* View Cart Button */
+.cart-notification .btn-view-cart {
+  font-size: 0.9em;
+  font-weight: 600;
+  padding: 8px 12px;
+  margin-top: 10px;
+  border-radius: 15px;
+  color: #009688;
+  border: 1px solid #009688;
+  background-color: #e0f2f1;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.cart-notification .btn-view-cart:hover {
+  background-color: #009688;
+  color: white;
+}
+/* Centered Cart Notification Popup */
+.cart-notification {
+  position: fixed;
+  top: 50%;
+  left: 55.6%;
+  transform: translate(-50%, -50%); /* Centers the notification */
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-in-out;
+  padding: 40px;
+}
+
+/* Card Styling */
+.cart-notification .card {
+  width: 400px;
+  height: auto;
+  background: #f9f9f9;
+  border-radius: 5px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1), 0 2px 3px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translate(-50%, -55%);
+  }
+  to {
+      opacity: 1;
+      transform: translate(-50%, -50%);
+  }
+}
+
+/* Card Wrapper */
+.cart-notification .card-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Cart Icon */
+.cart-notification .card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+}
+
+.cart-notification .icon-cart-box {
+  background-color: #e0f2f1;
+  width: 3.5em;
+  height: 3.5em;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Card Content */
+.cart-notification .card-content {
+  width: 100%;
+}
+
+/* Title Wrapper */
+.cart-notification .card-title-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+/* Title */
+.cart-notification .card-title {
+  font-size: 1em;
+  font-weight: 600;
+  color: #333;
+  padding-left: 5px;
+}
+
+/* Close Button */
+.cart-notification .card-action {
+  cursor: pointer;
+}
+
+.cart-notification .card-action svg {
+  fill: rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+}
+
+.cart-notification .card-action svg:hover {
+  fill: rgba(0, 0, 0, 0.6);
+}
+
+/* Product Name */
+.cart-notification .product-name {
+  font-size: 1em;
+  font-weight: 600;
+  color: #333;
+  margin-top: 5px;
+}
+
+/* Product Price */
+.cart-notification .product-price {
+  font-size: 1em;
+  font-weight: bold;
+  color: #009688;
+  margin-top: 5px;
+}
+
+/* View Cart Button */
+.cart-notification .btn-view-cart {
+  font-size: 0.9em;
+  font-weight: 600;
+  padding: 8px 12px;
+  margin-top: 10px;
+  border-radius: 15px;
+  color: #009688;
+  border: 1px solid #009688;
+  background-color: #e0f2f1;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.cart-notification .btn-view-cart:hover {
+  background-color: #009688;
+  color: white;
+}
+
+/* Order Completed Notification Popup */
+.notifications-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the notification */
+  z-index: 1000;
+  background: white;
+  width: 320px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translate(-50%, -55%);
+  }
+  to {
+      opacity: 1;
+      transform: translate(-50%, -50%);
+  }
+}
+
+/* Success Notification */
+.success {
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: rgb(240, 253, 244);
+}
+
+/* Icon */
+.succes-svg {
+  color: rgb(74, 222, 128);
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* Success Message Wrapper */
+.success-prompt-wrap {
+  margin-left: 0.75rem;
+}
+
+/* Heading */
+.success-prompt-heading {
+  font-weight: bold;
+  color: rgb(22, 101, 52);
+  font-size: 1.2rem;
+}
+
+/* Message */
+.success-prompt-prompt {
+  margin-top: 0.5rem;
+  color: rgb(21, 128, 61);
+  font-size: 0.9rem;
+}
+
+/* Button Container */
+.success-button-container {
+  display: flex;
+  margin-top: 0.875rem;
+  gap: 10px;
+}
+
+/* View Status Button */
+.success-button-main {
+  padding: 8px 12px;
+  background-color: #ECFDF5;
+  color: rgb(22, 101, 52);
+  font-size: 0.875rem;
+  font-weight: bold;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.success-button-main:hover {
+  background-color: #D1FAE5;
+}
+
+/* Dismiss Button */
+.success-button-secondary {
+  padding: 8px 12px;
+  background-color: #ECFDF5;
+  color: #065F46;
+  font-size: 0.875rem;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.success-button-secondary:hover {
+  background-color: #D1FAE5;
+}
