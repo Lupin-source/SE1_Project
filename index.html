@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,25 +10,26 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>  
+
+<body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div class="container">
             <a class="navbar-brand button" href="#" data-text="TechParts">
                 <span class="actual-text">&nbsp;TECHPART&nbsp;</span>
                 <span aria-hidden="true" class="hover-text">&nbsp;TECHPART&nbsp;</span>
-            </a>            
+            </a>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                 
+
                     <li class="nav-item">
                         <a class="nav-link" href="#" id="logout-btn">Logout</a>
-                    </li>                             
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="#" data-category="all">Home</a>
                     </li>
-                 
+
                     <li class="nav-item">
                         <a class="nav-link position-relative" id="cart-btn">
                             <i class="fas fa-shopping-cart"></i>
@@ -41,20 +43,20 @@
             </div>
         </div>
     </nav>
-   
-    
+
+
     <!-- Hero Section -->
     <div class="hero-section">
         <div class="hero-content">
-          <h1 class="hero-title">Experience the Future of Technology</h1>
-          <p class="hero-subtitle">Discover premium hardware tailored to your needs.</p>
-          <div class="hero-buttons">
-            <a href="#products-container" class="btn btn-primary">Shop Now</a>
-          </div>
+            <h1 class="hero-title">Experience the Future of Technology</h1>
+            <p class="hero-subtitle">Discover premium hardware tailored to your needs.</p>
+            <div class="hero-buttons">
+                <a href="#products-container" class="btn btn-primary">Shop Now</a>
+            </div>
         </div>
-      </div>
-      
-      
+    </div>
+
+
     <ul class="wrapper">
         <li class="icon black" id="collection-left-btn">
             <span class="tooltip">Left</span>
@@ -78,60 +80,60 @@
     <div class="collection-container">
         <div class="collection-carousel" id="collection-carousel">
             <div class="collection-card" data-category="processor">
-                <img src="https://placehold.co/150x100?text=PROCESSOR" alt="Processor">
+                <img src="processor.png" alt="Processor">
                 <p>Processor</p>
             </div>
             <div class="collection-card" data-category="motherboard">
-                <img src="https://placehold.co/150x100?text=MOTHERBOARD" alt="Motherboard">
+                <img src="Motherboard.png" alt="Motherboard">
                 <p>Motherboard</p>
             </div>
             <div class="collection-card" data-category="graphics-card">
-                <img src="https://placehold.co/150x100?text=GRAPHICS CARD" alt="Graphics Card">
+                <img src="graphicscard.jpg" alt="Graphics Card">
                 <p>Graphics Card</p>
             </div>
             <div class="collection-card" data-category="memory">
-                <img src="https://placehold.co/150x100?text=MEMORY" alt="Memory">
+                <img src="memory.png" alt="Memory">
                 <p>Memory</p>
             </div>
             <div class="collection-card" data-category="power-supply">
-                <img src="https://placehold.co/150x100?text=POWER SUPPLY" alt="Power Supply">
+                <img src="powersupply.jpg" alt="Power Supply">
                 <p>Power Supply</p>
             </div>
             <div class="collection-card" data-category="pc-case">
-                <img src="https://placehold.co/150x100?text=PC CASE" alt="PC Case">
+                <img src="pccase.png" alt="PC Case">
                 <p>PC Case</p>
             </div>
             <div class="collection-card" data-category="laptops">
-                <img src="https://placehold.co/150x100?text=LAPTOPS" alt="Laptops">
+                <img src="laptop.jpg" alt="Laptops">
                 <p>Laptops</p>
             </div>
             <div class="collection-card" data-category="monitor">
-                <img src="https://placehold.co/150x100?text=MONITOR" alt="Monitor">
+                <img src="monitor.png" alt="Monitor">
                 <p>Monitor</p>
             </div>
             <div class="collection-card" data-category="keyboard">
-                <img src="https://placehold.co/150x100?text=KEYBOARD" alt="Keyboard">
+                <img src="keyboard.jpeg" alt="Keyboard">
                 <p>Keyboard</p>
             </div>
             <div class="collection-card" data-category="mouse">
-                <img src="https://placehold.co/150x100?text=MOUSE" alt="Mouse">
+                <img src="mouse.jpg" alt="Mouse">
                 <p>Mouse</p>
             </div>
             <div class="collection-card" data-category="headset">
-                <img src="https://placehold.co/150x100?text=HEADSET" alt="Headset">
+                <img src="headset.png" alt="Headset">
                 <p>Headset</p>
             </div>
             <div class="collection-card" data-category="speaker">
-                <img src="https://placehold.co/150x100?text=SPEAKER" alt="Speaker">
+                <img src="Speaker.jpg" alt="Speaker">
                 <p>Speaker</p>
             </div>
             <div class="collection-card" data-category="network-devices">
-                <img src="https://placehold.co/150x100?text=NETWORK DEVICES" alt="Network Devices">
+                <img src="networkdevices.jpg" alt="Network Devices">
                 <p>Network Devices</p>
             </div>
         </div>
     </div>
-    
+
 
     <!-- Product Grid -->
     <div class="container py-5" id="products-container">
@@ -143,22 +145,22 @@
     <!-- Cart Sidebar -->
     <div class="offcanvas offcanvas-end" tabindex="-1" id="cart-sidebar">
         <div class="offcanvas-header">
-          <h5 class="offcanvas-title">Your Cart</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <h5 class="offcanvas-title">Your Cart</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body" id="cart-items">
-          <p class="text-center">Your cart is empty.</p>
+            <p class="text-center">Your cart is empty.</p>
         </div>
         <div class="offcanvas-footer">
-          <div class="cart-summary">
-            <p>Total: <span id="cart-total">₱0</span></p>
-            <button class="btn btn-success w-100">Checkout</button>
-          </div>
+            <div class="cart-summary">
+                <p>Total: <span id="cart-total">₱0</span></p>
+                <button class="btn btn-success w-100">Checkout</button>
+            </div>
         </div>
-      </div>
-      
-      
-      <div id="chatbot-toggle-container">
+    </div>
+
+
+    <div id="chatbot-toggle-container">
         <ul id="chatbot-toggle">
             <li style="--i:#56CCF2;--j:#2F80ED;" onclick="toggleChatbot()">
                 <span class="icon">💬</span>
@@ -166,7 +168,7 @@
             </li>
         </ul>
     </div>
-    
+
 
     <!-- Chatbot -->
     <div class="chatbot-container">
@@ -184,14 +186,15 @@
             </div>
         </div>
     </div>
-    
-    
-    
+
+
+
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
     <script src="chatbot.js"></script>
-    
+
 </body>
+
 </html>
