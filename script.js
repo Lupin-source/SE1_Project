@@ -48,8 +48,6 @@ const products = [
     { id: 22, name: 'Logitech G Pro Wireless', price: 7999, category: 'mouse', image: 'https://placehold.co/600x400?text=Logitech+G+Pro', description: 'A lightweight wireless gaming mouse designed for esports professionals.' },
     { id: 23, name: 'Razer DeathAdder V2', price: 5999, category: 'mouse', image: 'https://placehold.co/600x400?text=DeathAdder+V2', description: 'An ergonomic gaming mouse with high-precision optical sensor and ultra-fast response time.' },
     { id: 24, name: 'Corsair M65 RGB Elite', price: 4999, category: 'mouse', image: 'https://placehold.co/600x400?text=Corsair+M65', description: 'A durable gaming mouse with customizable weight and sniper button for FPS games.' },
-
-
     // Headset
     { id: 22, name: 'HyperX Cloud II', price: 7999, category: 'headset', image: 'https://placehold.co/600x400?text=HyperX+Cloud+II', description: 'A comfortable gaming headset with 7.1 surround sound.' },
     { id: 23, name: 'SteelSeries Arctis Pro', price: 12999, category: 'headset', image: 'https://placehold.co/600x400?text=Arctis+Pro', description: 'High-fidelity gaming headset with a premium audio experience.' },
@@ -346,3 +344,4 @@ document.getElementById("logout-btn").addEventListener("click", function() {
     localStorage.removeItem("user"); // Remove user from localStorage
     window.location.href = "login.html"; // Redirect to login page
 });
+
