@@ -167,7 +167,6 @@ function handleConcernSelection(concern) {
             response = "🛠️ <b>Technical Concern</b> - Select your issue:";
             buttons = [
                 { text: "Website Not Loading ⚠️", value: "website not loading" },
-                { text: "App Crash 📲", value: "app crash" },
                 { text: "Payment Failure 💳", value: "payment failure" }
             ];
             break;
