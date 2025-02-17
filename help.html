@@ -4,48 +4,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Help</title>
+    <title>Help Center</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body {
             background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
         }
         
-        .help-container {
-            max-width: 800px;
-            margin: auto;
-            padding: 40px;
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        
-        h1 {
+        .help-hero {
+            background: linear-gradient(135deg, #4caf50, #81c784);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
             margin-bottom: 40px;
-            font-weight: bold;
-            color: #343a40;
         }
         
-        .help-item {
-            display: flex;
-            align-items: center;
+        .help-hero h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
             margin-bottom: 20px;
         }
         
-        .help-item img {
+        .help-hero p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .help-container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 20px;
+        }
+        
+        .help-card {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            overflow: hidden;
+        }
+        
+        .help-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .help-card img {
             width: 80px;
             height: 80px;
-            margin-right: 15px;
+            margin-right: 20px;
+            transition: transform 0.3s ease;
         }
         
-        .help-item h3 {
+        .help-card:hover img {
+            transform: scale(1.1);
+        }
+        
+        .help-card h3 {
             color: #4caf50;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
+            font-size: 1.4rem;
         }
         
-        .help-item p {
+        .help-card p {
             color: #6c757d;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .help-card .btn {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .help-card .btn:hover {
+            background-color: #388e3c;
+        }
+        
+        .contact-section {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-top: 40px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .contact-section h2 {
+            color: #343a40;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+        
+        .contact-section p {
+            color: #6c757d;
+            margin-bottom: 30px;
+        }
+        
+        .contact-section .btn {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 30px;
+            border-radius: 25px;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .contact-section .btn:hover {
+            background-color: #388e3c;
         }
     </style>
 </head>
@@ -77,36 +153,71 @@
         </div>
     </nav>
 
+    <!-- Help Hero Section -->
+    <div class="help-hero">
+        <div class="container">
+            <h1>How can we help you today?</h1>
+            <p>Find answers to common questions or get in touch with our support team.</p>
+        </div>
+    </div>
+
     <!-- Help Section -->
     <div class="help-container py-5">
-        <h1 class="text-center">Help</h1>
-        <div class="help-item">
-            <img src="login.png" alt="Login Issues Icon">
-            <div>
-                <h3>Login Issues</h3>
-                <p>Ensure your email and password are correct. If you forgot your password, use the reset option.</p>
+        <div class="row">
+            <!-- Login Issues -->
+            <div class="col-md-6 mb-4">
+                <div class="help-card p-4 d-flex align-items-center">
+                    <img src="login.png" alt="Login Issues Icon">
+                    <div>
+                        <h3>Login Issues</h3>
+                        <p>Having trouble logging in? Reset your password or check your credentials.</p>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Not Found -->
+            <div class="col-md-6 mb-4">
+                <div class="help-card p-4 d-flex align-items-center">
+                    <img src="product.png" alt="Product Not Found Icon">
+                    <div>
+                        <h3>Product Not Found</h3>
+                        <p>Can't find a product? Try searching by category or using filters.</p>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cart Issues -->
+            <div class="col-md-6 mb-4">
+                <div class="help-card p-4 d-flex align-items-center">
+                    <img src="cart.png" alt="Cart Issues Icon">
+                    <div>
+                        <h3>Cart Not Updating</h3>
+                        <p>Refresh the page or clear your browser cache to resolve cart issues.</p>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Issues -->
+            <div class="col-md-6 mb-4">
+                <div class="help-card p-4 d-flex align-items-center">
+                    <img src="technical.png" alt="Technical Issues Icon">
+                    <div>
+                        <h3>Technical Issues</h3>
+                        <p>Experiencing technical problems? Try switching browsers or clearing cache.</p>
+
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="help-item">
-            <img src="product.png" alt="Product Not Found Icon">
-            <div>
-                <h3>Product Not Found</h3>
-                <p>Check the spelling of the product name or try searching by category.</p>
-            </div>
-        </div>
-        <div class="help-item">
-            <img src="cart.png" alt="Cart Issues Icon">
-            <div>
-                <h3>Cart Not Updating</h3>
-                <p>Refresh the page if the cart does not reflect the latest changes.</p>
-            </div>
-        </div>
-        <div class="help-item">
-            <img src="technical.png" alt="Technical Issues Icon">
-            <div>
-                <h3>Technical Issues</h3>
-                <p>Clear your browser cache or try a different browser if you encounter loading problems.</p>
-            </div>
+
+        <!-- Contact Section -->
+        <div class="contact-section">
+            <h2>Still need help?</h2>
+            <p>Our support team is here to assist you. Reach out to us anytime!</p>
+
         </div>
     </div>
 
