@@ -7,43 +7,99 @@
     <title>About Us</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body {
             background-color: #f8f9fa;
         }
         
-        .developer-card {
-            transition: transform 0.2s;
-            border: 1px solid #dee2e6;
+        .about-intro {
+            background: linear-gradient(135deg, #4caf50, #81c784);
+            color: white;
+            padding: 50px 30px;
             border-radius: 10px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .about-intro h5 {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+        
+        .developer-card {
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: none;
+            border-radius: 15px;
             background-color: #ffffff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            text-align: center;
         }
         
         .developer-card:hover {
-            transform: scale(1.05);
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
         
         .developer-img {
-            width: 150px;
-            height: 150px;
+            width: 120px;
+            height: 120px;
             object-fit: cover;
             border-radius: 50%;
-            border: 3px solid #4caf50;
+            border: 4px solid #4caf50;
+            margin-bottom: 15px;
         }
         
         h1 {
             margin-bottom: 40px;
             font-weight: bold;
             color: #343a40;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
         
         h3 {
             color: #4caf50;
+            margin-bottom: 10px;
         }
         
         p {
             color: #6c757d;
+            font-size: 0.95rem;
+        }
+        
+        .social-links {
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            color: #4caf50;
+            font-size: 1.2rem;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: #388e3c;
+        }
+        
+        .cta-button {
+            margin-top: 30px;
+        }
+        
+        .cta-button .btn {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        .cta-button .btn:hover {
+            background-color: #388e3c;
         }
     </style>
 </head>
@@ -77,38 +133,61 @@
 
     <!-- About Section -->
     <div class="container py-5">
+        <section class="about-intro">
+            <h5>TechPart is revolutionizing the way you shop online with its built-in AI-powered chatbot, designed to make your experience faster, smarter, and more seamless. As the ultimate e-commerce app, TechPart uses advanced AI technology to instantly
+                answer all your product-related questions, provide personalized recommendations, and guide you through every step of your shopping journey. Whether you're comparing features, checking availability, or exploring deals, the AI chatbot is
+                available 24/7 to ensure you get accurate, real-time support. No waiting, no hassle. With TechPart, shopping isn’t just convenient; it’s a whole new level of effortless. Welcome to the future of e-commerce.</h5>
+        </section>
         <h1 class="text-center">About Us</h1>
         <div class="row">
             <div class="col-md-4 mb-4">
-                <div class="developer-card text-center p-4">
-                    <img src="criscel.png" alt="Developer 1" class="developer-img mb-3">
+                <div class="developer-card">
+                    <img src="criscel.png" alt="Developer 1" class="developer-img">
                     <h3>Developer 1</h3>
                     <p>Role: Frontend Developer</p>
                     <p style="text-align: justify;">
                         I'm a Frontend Developer—I build responsive, user-friendly interfaces with <b>HTML and CSS</b>. I bring designs to life, enhance user experience, and ensure smooth performance.
                     </p>
+                    <div class="social-links">
+                        <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                    </div>
                 </div>
             </div>
             <div class="col-md-4 mb-4">
-                <div class="developer-card text-center p-4">
-                    <img src="russel.jpg" alt="Developer 2" class="developer-img mb-3">
+                <div class="developer-card">
+                    <img src="russel.jpg" alt="Developer 2" class="developer-img">
                     <h3>Developer 2</h3>
                     <p>Role: Backend Developer</p>
                     <p style="text-align: justify;">
                         I'm a Backend Developer—I build and manage servers, databases, and APIs with <b>JavaScript</b>. I ensure seamless functionality, optimize performance, and maintain security.
                     </p>
+                    <div class="social-links">
+                        <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                    </div>
                 </div>
             </div>
             <div class="col-md-4 mb-4">
-                <div class="developer-card text-center p-4">
-                    <img src="francis.jpg" alt="Developer 3" class="developer-img mb-3">
+                <div class="developer-card">
+                    <img src="francis.jpg" alt="Developer 3" class="developer-img">
                     <h3>Developer 3</h3>
                     <p>Role: UI/UX Designer</p>
                     <p style="text-align: justify;">
                         I'm a UI/UX Designer—I craft intuitive and engaging designs that enhance user experience. I focus on usability, accessibility, and visual consistency across platforms.
                     </p>
+                    <div class="social-links">
+                        <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                    </div>
                 </div>
             </div>
+        </div>
+        <div class="cta-button text-center">
+            <a href="#" class="btn">Contact Our Team</a>
         </div>
     </div>
 
